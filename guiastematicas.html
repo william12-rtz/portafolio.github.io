@@ -1,0 +1,318 @@
+<!DOCTYPE HTML>
+<!--
+	Dopetrope by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>API rest - Recursos digitales</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="icon" href="./images/lo.png" type="image/png">
+	</head>
+	<body class="no-sidebar is-preload">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+			<section id="header">
+
+				<!-- Logo -->
+				<br><br>
+					<h1><a>Recursos digiatles (Wordpress) </a></h1><br>
+					<p>Este portafolio presenta la evidencia de proyectos desarrollados en tecnologías web, con énfasis en la implementación de funcionalidades interactivas en WordPress utilizando HTML, CSS, JavaScript, jQuery, PHP y APIs externas.
+
+						Entre los trabajos destacados se encuentra la creación de un shortcode en WordPress que consume una API pública para mostrar libros de ingeniería con paginación y estilos personalizados.</p>
+
+				<!-- Nav -->
+				<nav id="nav">
+					<div class="logo">
+						<a href="#"><img href="././index.html" src="images/lo.png" alt="Mi Logo"></a>
+					</div>
+					<ul>
+						<li class="current"><a href="./index.html">Inicio</a></li>
+						<li><a  href="index.html#skills">Skills</a></li>
+						<li><a href="index.html#proyectos">Proyectos</a></li>
+						<li><a href="index.html#educacion">Educación</a></li>
+						<li><a href="#footer">Contacto</a></li>
+					</ul>
+				</nav>
+			</section>
+
+			<!-- Main -->
+				<section id="main">
+					<div class="container">
+
+						<!-- Content -->
+							<article class="box post">
+								<a href="#" class="image featured"><img src="images/word.png" alt="" /></a>
+								<header>
+									<h2>Libros digitales</h2>
+									<p>Recursos electronicos</p>
+								</header>
+
+								<h3>Implementación de Gestión de Sesiones</h3>
+								<p>
+									Se desarrolló una funcionalidad para mostrar el usuario activo y permitir el cierre de sesión de manera dinámica. Se utilizó jQuery para actualizar la interfaz según el estado de la sesión.
+								</p><br>
+								<a href="#" class="image featured"><img src="images/word/short.png" alt="" /></a>
+
+								<p>Asi se muestra en código de la función en wordpress</p>
+									<div class="typing-container" id="typing-text"></div>
+<div class="code-container">
+    <pre><code>
+<span class="function">function</span> <span class="keyword">mostrar_sesion_usuario</span>() {
+    <span class="keyword">if</span> (!<span class="function">is_user_logged_in</span>()) {
+        <span class="string">return '&lt;p&gt;No has iniciado sesión.&lt;/p&gt;';</span>
+    }
+
+    <span class="keyword">$current_user</span> = <span class="function">wp_get_current_user</span>();
+    <span class="keyword">$username</span> = $current_user->user_login;
+    
+    <span class="function">ob_start</span>(); ?&gt;
+    
+    &lt;<span class="keyword">div</span> id="session-container"&gt;
+        &lt;<span class="keyword">p</span> id="session2"&gt;Usuario: &lt;?php echo esc_html($username); ?&gt;&lt;/p&gt;
+        &lt;<span class="function">button</span> id="cerrar"&gt;Cerrar sesión&lt;/button&gt;
+    &lt;/div&gt;
+
+    &lt;script&gt;
+    jQuery(document).ready(function($) {
+        $("#cerrar").click(function() {
+            $.ajax({
+                url: "&lt;?php echo wp_logout_url(home_url()); ?&gt;",
+                <span class="keyword">method</span>: "POST",
+                <span class="keyword">success</span>: <span class="function">function</span>() {
+                    <span class="function">alert</span>("Sesión cerrada");
+                    <span class="function">location.reload</span>();
+                },
+                <span class="keyword">error</span>: <span class="function">function</span>() {
+                    <span class="function">alert</span>("Error al cerrar la sesión");
+                }
+            });
+        });
+    });
+    &lt;/script&gt;
+
+    &lt;?php 
+    <span class="function">return</span> ob_get_clean();
+}
+<span class="function">add_shortcode</span>('mostrar_sesion', <span class="function">mostrar_sesion_usuario</span>);
+        </code></pre>
+</div>
+
+
+
+<style>
+    .typing-container {
+        font-size: 1em;
+        color: white;
+        border-right: 3px solid rgb(255, 255, 255);
+        white-space: nowrap;
+        overflow: hidden;
+        width: 0;
+        display: inline-block;
+		justify-content: center;
+        align-items: center;
+		display: flex;
+    justify-content: center;
+		
+    }
+
+	.typing-container div{
+		display: block;
+    margin: 0 auto;
+	}
+    @keyframes typing {
+        from { width: 0; }
+        to { width: 580px; }
+    }
+    @keyframes blink {
+        50% { border-color: transparent; }
+    }
+    .code-container {
+        width: 600px;
+        height: 300px;
+        background: #2d2d2d;
+        color: #ffffff;
+        padding: 10px;
+        border-radius: 5px;
+        overflow-y: auto;
+        white-space: pre-wrap;
+        font-family: monospace;
+		margin: 0 auto;
+    justify-content: center;
+	display: block;
+    }
+
+    .keyword { color: #569cd6; }
+    .string { color: #ce9178; }
+    .function { color: #dcdcaa; }
+    .comment { color: #6a9955; font-style: italic; }
+</style>
+
+
+								</p>
+								<section>
+									<header>
+										<h3>Consumo de API para libros</h3>
+									</header>
+									<p>
+										Se desarrolló un shortcode en WordPress que permite mostrar libros de ingeniería obtenidos desde la API de Open Library. Se implementó paginación dinámica para mostrar 4 libros por página.
+									</p>
+									<p>⚠️Desplazar scrooll hacia derecha para ver codigo</p>
+
+									<p>
+										<div class="typing-container" id="typing-text"></div>
+										<div class="code-container">
+											<pre><code>
+										<span class="function">function</span> <span class="keyword">obtener_libros_ingenieria</span>($page = 1) {
+											<span class="comment">// URL de la API de Open Library para buscar libros relacionados con Ingeniería</span>
+											$url = <span class="string">'https://openlibrary.org/search.json?q=ingeniería&limit=4&page='</span> . $page;
+										
+											<span class="comment">// Obtención de los datos de la API</span>
+											$response = <span class="function">wp_remote_get</span>($url);
+											<span class="keyword">if</span> (<span class="function">is_wp_error</span>($response)) {
+												<span class="keyword">return</span> <span class="string">'No se pudo obtener información de la API.'</span>;
+											}
+										
+											<span class="comment">// Convertir la respuesta JSON en un array</span>
+											$data = <span class="function">json_decode</span>(<span class="function">wp_remote_retrieve_body</span>($response), <span class="keyword">true</span>);
+											
+											<span class="keyword">if</span> (isset($data['docs']) && !empty($data['docs'])) {
+												<span class="comment">// Crear el HTML para mostrar los libros</span>
+												$output = <span class="string">'&lt;div class="libros-container"&gt;'</span>;
+												<span class="keyword">foreach</span> ($data['docs'] as $book) {
+													$title = isset($book['title']) ? $book['title'] : <span class="string">'Título no disponible'</span>;
+													$author = isset($book['author_name']) ? <span class="function">implode</span>(<span class="string">', '</span>, $book['author_name']) : <span class="string">'Autor no disponible'</span>;
+													$first_publish_year = isset($book['first_publish_year']) ? $book['first_publish_year'] : <span class="string">'Año no disponible'</span>;
+													$cover_id = isset($book['cover_i']) ? $book['cover_i'] : '';
+										
+													<span class="comment">// Generar el HTML para cada libro</span>
+													$output .= <span class="string">'&lt;div class="libro"&gt;'</span>;
+													<span class="keyword">if</span> ($cover_id) {
+														$output .= <span class="string">'&lt;img src="https://covers.openlibrary.org/b/id/'</span> . $cover_id . <span class="string">'-L.jpg" alt="'</span> . <span class="function">esc_attr</span>($title) . <span class="string">'" class="libro-cover"&gt;'</span>;
+													}
+													$output .= <span class="string">'&lt;h3 class="libro-titulo"&gt;'</span> . <span class="function">esc_html</span>($title) . <span class="string">'&lt;/h3&gt;'</span>;
+													$output .= <span class="string">'&lt;p class="libro-autor"&gt;Autor(es): '</span> . <span class="function">esc_html</span>($author) . <span class="string">'&lt;/p&gt;'</span>;
+													$output .= <span class="string">'&lt;p class="libro-publicacion"&gt;Publicado en: '</span> . <span class="function">esc_html</span>($first_publish_year) . <span class="string">'&lt;/p&gt;'</span>;
+													$output .= <span class="string">'&lt;/div&gt;'</span>;
+												}
+												$output .= <span class="string">'&lt;/div&gt;'</span>;
+										
+												<span class="comment">// Paginación</span>
+												$output .= <span class="string">'&lt;div class="paginacion"&gt;'</span>;
+												$output .= <span class="string">'&lt;a href="?page='</span> . ($page - 1) . <span class="string">'" class="paginacion-prev" '</span> . ($page <= 1 ? <span class="string">'style="pointer-events: none;"'</span> : '') . <span class="string">'&gt;Anterior&lt;/a&gt;'</span>;
+												$output .= <span class="string">'&lt;a href="?page='</span> . ($page + 1) . <span class="string">'" class="paginacion-next"&gt;Siguiente&lt;/a&gt;'</span>;
+												$output .= <span class="string">'&lt;/div&gt;'</span>;
+										
+												<span class="keyword">return</span> $output;
+											} <span class="keyword">else</span> {
+												<span class="keyword">return</span> <span class="string">'No se encontraron libros de ingeniería.'</span>;
+											}
+										}
+										
+										<span class="comment">// Registrar el shortcode</span>
+										<span class="function">function</span> <span class="keyword">libros_ingenieria_shortcode</span>($atts) {
+											$page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
+											<span class="keyword">return</span> <span class="function">obtener_libros_ingenieria</span>($page);
+										}
+										<span class="function">add_shortcode</span>(<span class="string">'mostrar_libros_ingenieria'</span>, <span class="function">'libros_ingenieria_shortcode'</span>);
+											</code></pre>
+										</div>
+									</p>
+
+									<p>Se agrego css adicional para los libros</p>
+									<br>
+									<a href="#" class="centeres" ><img src="images/word/adi.png"   /></a>
+								</section>
+								
+							</article>
+
+<style>
+
+	.centeres img{
+		width: 290px;
+		height: 600px;
+    display: block;
+    margin: 0 auto;
+
+	}
+
+	.centeres {
+    display: flex;
+    justify-content: center;
+}
+</style>
+					</div>
+				</section>
+
+			<!-- Footer -->
+			<section id="footer">
+				<div class="container">
+					<div class="row">
+						<div class="col-8 col-12-medium">
+							<section>
+								<header>
+									<h2>Redes Sociales</h2>
+								</header>
+								<ul class="social">
+									<li><a class="icon brands fa-github" href="https://github.com/wighot" color="black"><span class="label">Git</span></a></li>
+							<li><a class="icon brands fa-google" href="aleartiga12@gmail.com"><span class="label">correo</span></a></li>
+							<li><a class="icon brands fa-whatsapp" href="https://wa.me/qr/YH2XLQMCJH72B1"><span class="label">wa</span></a></li>
+							<li><a class="icon brands fa-linkedin-in" href="https://www.linkedin.com/in/alejandro-ortiz-b0b8731a4"><span class="label">LinkedIn</span></a></li>
+								</ul>
+								<ul class="contact">
+									<li>
+										<h3>Dirección</h3>
+										<p>
+											El Salvador-San Salvador
+										</p>
+									</li>
+									<li>
+										<h3>E-mail</h3>
+										<p><a href="#">aleartiga12@gmail.com</a></p>
+									</li>
+									<li>
+										<h3>Numero</h3>
+										<p>(503) 7744-9258</p>
+									</li>
+								</ul>
+							</section>
+						</div>
+						<div class="col-4 col-12-medium">
+							<section>
+								<header>
+									<h2>Acerca de mi</h2>
+								</header>
+								<a href="#" class="image featured"><img src="images/lo.png" alt="" width="10px" height="" /></a>
+								<p>
+									
+									Apasionado por la creación de soluciones eficientes y escalables,
+									con habilidades en múltiples lenguajes de programación, brindando
+									también diseño y desarrollo para mejorar la experiencia del usuario,
+									Actualmente estudiante en Ingeniería en Computación.
+								</p>
+								
+							</section>
+						</div>
+					</div>
+					</div>
+					</section>
+
+		</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.dropotron.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+
+			
+
+	</body>
+</html>
